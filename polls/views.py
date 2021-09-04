@@ -3,8 +3,10 @@ from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 from django.http import Http404
 from django.views import generic
+from django.utils import timezone
 
-from .models import Question,Choice
+from .models import Question, Choice
+
 
 class IndexView(generic.ListView):
     template_name = 'polls/index.html'
@@ -38,3 +40,13 @@ def vote(request, question_id):
         selected_choice.votes += 1
         selected_choice.save()
         return HttpResponseRedirect(reverse('polls:results', args=(question.id,)))
+
+
+def get_queryset(self):
+    """
+    Return the last five published questions (not including those set to be
+    published in the future).
+    """
+    return Question.objects.filter(
+        pub_date__lte=timezone.now()
+    ).order_by('-pub_date')[:5]
