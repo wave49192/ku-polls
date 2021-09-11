@@ -4,7 +4,7 @@ from django.urls import reverse
 from django.http import Http404
 from django.views import generic
 from django.utils import timezone
-
+from django.contrib import messages
 from .models import Question, Choice
 
 
@@ -50,4 +50,14 @@ def vote(request, question_id):
         selected_choice.votes += 1
         selected_choice.save()
         return HttpResponseRedirect(reverse('polls:results', args=(question.id,)))
+
+def detail(request,question_id=None):
+    question = get_object_or_404(Question, pk=question_id)
+    if not question.can_vote():
+        messages.error(request, f"Poll not available")
+        return HttpResponseRedirect(reverse('polls:index'))
+    else:
+        return render(request, 'polls/detail.html', {'question': question,})
+
+
 
