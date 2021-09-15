@@ -1,5 +1,7 @@
-<h1>{{ question.question_text }}</h1>
+{% extends "polls/bootstrap.html" %}
+{% block content %}
 
+<h1>{{ question.question_text }}</h1>
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 
 <form action="{% url 'polls:vote' question.id %}" method="post">
@@ -12,3 +14,5 @@
 
 </form>
 <a href="{% url 'polls:index' %}">Back to List of Polls</a>
+
+{% endblock %}
