@@ -20,23 +20,27 @@
     </nav>
     <div style="margin: 40px; border-style: solid;border-radius: 20px;border-width: thick;
     background-color: whitesmoke">
-<h1 style="margin-left: 40px;margin-top: 20px">{{ question.question_text }}</h1>
-{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
-<div style="margin: 40px">
-<form action="{% url 'polls:vote' question.id %}" method="post">
-{% csrf_token %}
-{% for choice in question.choice_set.all %}
-    <div style="margin-top: 20px">
-    <button  type="submit"  class="btn btn-dark" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}"> VOTE</button>
-    <label for="choice{{ forloop.counter }}"style="margin-left: 20px;font-size: x-large">{{ choice.choice_text }}</label></div><br>
-{% endfor %}
+        <h1 style="margin-left: 40px;margin-top: 20px">{{ question.question_text }}</h1>
+        {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+        <div style="margin: 40px">
+            <form action="{% url 'polls:vote' question.id %}" method="post">
+                {% csrf_token %}
+                {% for choice in question.choice_set.all %}
+                    <div style="margin-top: 20px">
+                        <button type="submit" class="btn btn-dark" name="choice" id="choice{{ forloop.counter }}"
+                                value="{{ choice.id }}"> VOTE
+                        </button>
+                        <label for="choice{{ forloop.counter }}"
+                               style="margin-left: 20px;font-size: x-large">{{ choice.choice_text }}</label></div><br>
+                {% endfor %}
 
-</form>
-<div style="margin-top: 40px;text-align: right">
-    <button  class="btn btn-dark">
-    <a href="{% url 'polls:index' %}" style="text-decoration: none;color:white;font-size: large ">Back to List of Polls</a>
-        </button>
+            </form>
+            <div style="margin-top: 40px;text-align: right">
+                <button class="btn btn-dark">
+                    <a href="{% url 'polls:index' %}" style="text-decoration: none;color:white;font-size: large ">Back
+                        to List of Polls</a>
+                </button>
+            </div>
+        </div>
     </div>
-</div>
-</div>
 {% endblock %}
