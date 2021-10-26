@@ -84,6 +84,7 @@ DATABASES = {
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
 LOGIN_REDIRECT_URL = '/polls/'
+LOGOUT_REDIRECT_URL = '/polls/'
 AUTHENTICATION_BACKENDS = (
     # username/password authentication
    'django.contrib.auth.backends.ModelBackend',
