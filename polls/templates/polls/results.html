@@ -13,9 +13,7 @@
             {% endfor %}
         </ul>
         <div style="text-align: right; margin-right: 40px;margin-bottom: 40px">
-            <button class="btn btn-dark">
-                <a href="{% url 'polls:detail' question.id %}" style="text-decoration: none;color:white">Vote again?</a>
-            </button>
+
 
             <button class="btn btn-dark">
                 <a href="{% url 'polls:index' %}" style="text-decoration: none;color: white">Back to List of Polls</a>
