@@ -2,11 +2,7 @@
 {% load static %}
 {% block content %}
 
-    {% if user.is_authenticated %}
 
-        <p style="color: black;margin-top: 8px;margin-left: 20px">Hello, {{ user.username }}</p>
-
-    {% endif %}
     {% if messages %}
         <div class="messages">
             {% for msg in messages %}
