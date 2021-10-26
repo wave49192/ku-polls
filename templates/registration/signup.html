@@ -1,16 +1,33 @@
-{% extends 'base.html' %}
-
+{% extends "polls/bootstrap.html" %}
 {% block content %}
-<h2>Register</h2>
-<form method="POST">
-    {% csrf_token %}
-    <table>
-    {{ form.as_table }}
-    <tr>
-    <td colspan="2">
-    <button type="submit">Register</button>
-    </td>
-    </tr>
-    </table>
-</form>
+    <style>
+        centerize {
+            height: 520px;
+            width: 400px;
+        {#background: black;#} position: absolute;
+            top: 50%;
+            left: 50%;
+            margin-top: -100px;
+            margin-left: -200px;
+            border-style: solid;
+            border-radius: 50px;
+            border-width: thick;
+            background-color: white;
+            text-align: center;
+        }
+    </style>
+    <centerize>
+        <h2>Register</h2>
+        <form method="POST">
+            {% csrf_token %}
+            <table>
+                {{ form.as_table }}
+                <tr>
+                    <td colspan="2">
+                        <button type="submit">Register</button>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </centerize>
 {% endblock %}
