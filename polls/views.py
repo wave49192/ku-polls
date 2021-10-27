@@ -6,6 +6,7 @@ from django.views import generic
 from django.utils import timezone
 from django.contrib import messages
 from .models import Question, Choice
+from django.contrib.auth.decorators import login_required
 
 
 class IndexView(generic.ListView):
@@ -43,6 +44,7 @@ class ResultsView(generic.DetailView):
     template_name = 'polls/results.html'
 
 
+@login_required
 def vote(request, question_id):
     """Vote Function If no vote return to page before and print the message."""
     question = get_object_or_404(Question, pk=question_id)
@@ -54,11 +56,16 @@ def vote(request, question_id):
             'error_message': "You didn't select a choice.",
         })
     else:
-        selected_choice.votes += 1
-        selected_choice.save()
+        if question.vote_set.filter(user=request.user).exists():
+            vote = question.vote_set.get(user=request.user)
+            vote.choice = selected_choice
+            vote.save()
+        else:
+            selected_choice.vote_set.create(user=request.user, question=question)
         return HttpResponseRedirect(reverse('polls:results', args=(question.id,)))
 
 
+@login_required
 def detail(request, question_id=None):
     """Return poll not available or go to detail page."""
     question = get_object_or_404(Question, pk=question_id)
