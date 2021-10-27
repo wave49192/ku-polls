@@ -5,7 +5,7 @@ from django.urls import reverse
 from django.views import generic
 from django.utils import timezone
 from django.contrib import messages
-from .models import Question, Choice
+from .models import Question, Choice, Vote
 from django.contrib.auth.decorators import login_required
 
 
@@ -73,4 +73,8 @@ def detail(request, question_id=None):
         messages.error(request, f'{"Poll not available"}')
         return HttpResponseRedirect(reverse('polls:index'))
     else:
-        return render(request, 'polls/detail.html', {'question': question, })
+        try:
+            last_vote = question.vote_set.get(user=request.user).choice
+        except (KeyError, Vote.DoesNotExist):
+            return render(request, 'polls/detail.html', {'question': question})
+        return render(request, 'polls/detail.html', {'question': question, 'last_vote': last_vote})
