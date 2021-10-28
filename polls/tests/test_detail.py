@@ -38,4 +38,4 @@ class QuestionDetailViewTests(TestCase):
         past_question.end_date = timezone.now() + datetime.timedelta(days=10)
         past_question.save()
         response = self.client.get(url)
-        self.assertContains(response, past_question.question_text)
+        self.assertEqual(response.status_code, 302)
