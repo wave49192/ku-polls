@@ -9,3 +9,12 @@
 * [Iteration1 Plan](https://github.com/wave49192/ku-polls/wiki/Iteration-1-Plan)
 * [Iteration2 Plan](https://github.com/wave49192/ku-polls/wiki/Iteration-2-Plan)
 * [Iteration3 Plan](https://github.com/wave49192/ku-polls/wiki/Iteration-3-Plan)
+
+## Running KU Polls
+
+Users provided by the initial data (users.json):
+
+| Username  | Password    |
+|-----------|-------------|
+| demo1     | wave49192   |
+| demo2     | wave49192    |
